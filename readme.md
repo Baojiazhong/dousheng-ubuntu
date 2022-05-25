@@ -33,8 +33,3 @@ postman desktop
 #### 2.login
 <img src="images/shot_login.jpg" width="2850"  alt=""/>
 
-## 现在的问题是:
-
-- 1.关注/取关的时候,相应用户的粉丝数量不会动
-
-- 2.关注列表,微服务的server显示成功response,但数据在送往前端的路上报了内存地址错误,怀疑指针数组传来传去写错了
