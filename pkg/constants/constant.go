@@ -12,12 +12,17 @@ const (
 	// Notes       = "notes"
 	// NoteID      = "note_id"
 	// 服务相关常量
-	ApiServiceName           = "demoapi"
-	VideoServiceName         = "demovideo"
-	UserServiceName          = "demouser"
-	EtcdAddress              = "127.0.0.1:2379"
-	CPURateLimit     float64 = 80.0
-	DefaultLimit             = 10
+	ApiServiceName            = "demoapi"
+	VideoServiceName          = "demovideo"
+	UserServiceName           = "demouser"
+	EtcdAddress               = "127.0.0.1:2379"
+	CPURateLimit      float64 = 80.0
+	DefaultLimit              = 10
+	QueryUserInfo     int32   = 1
+	QueryFollowList   int32   = 2
+	QueryFollowerList int32   = 3
+	RelationAdd       int32   = 1
+	RelationDel       int32   = 2
 )
 
 // const (

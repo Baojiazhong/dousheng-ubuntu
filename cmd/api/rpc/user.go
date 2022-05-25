@@ -74,3 +74,39 @@ func QueryUser(ctx context.Context, req *userdemo.CheckUserRequest) (int64, errn
 	// must return success
 	return resp.UserId, errno.NewErrNo(resp.BaseResp.StatusCode, resp.BaseResp.StatusMsg)
 }
+
+// InfoGet get user info
+func InfoGetUser(ctx context.Context, req *userdemo.InfoGetUserRequest) (*userdemo.User, error) {
+	resp, err := userClient.InfoGetUser(ctx, req)
+	if err != nil {
+		return nil, err
+	}
+	if resp.BaseResp.StatusCode != 0 {
+		return nil, errno.NewErrNo(resp.BaseResp.StatusCode, resp.BaseResp.StatusMsg)
+	}
+	return resp.User, nil
+}
+
+// MGetUser multiple get list of user info
+func MGetUser(ctx context.Context, req *userdemo.MGetUserRequest) ([]*userdemo.User, error) {
+	resp, err := userClient.MGetUser(ctx, req)
+	if err != nil {
+		return nil, err
+	}
+	if resp.BaseResp.StatusCode != 0 {
+		return nil, errno.NewErrNo(resp.BaseResp.StatusCode, resp.BaseResp.StatusMsg)
+	}
+	return resp.Users, nil
+}
+
+// UpdateUser update user info
+func UpdateUser(ctx context.Context, req *userdemo.UpdateUserRequest) error {
+	resp, err := userClient.UpdateUser(ctx, req)
+	if err != nil {
+		return err
+	}
+	if resp.BaseResp.StatusCode != 0 {
+		return errno.NewErrNo(resp.BaseResp.StatusCode, resp.BaseResp.StatusMsg)
+	}
+	return nil
+}
