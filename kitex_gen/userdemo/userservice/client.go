@@ -13,6 +13,9 @@ import (
 type Client interface {
 	CreateUser(ctx context.Context, req *userdemo.CreateUserRequest, callOptions ...callopt.Option) (r *userdemo.CreateUserResponse, err error)
 	CheckUser(ctx context.Context, req *userdemo.CheckUserRequest, callOptions ...callopt.Option) (r *userdemo.CheckUserResponse, err error)
+	InfoGetUser(ctx context.Context, req *userdemo.InfoGetUserRequest, callOptions ...callopt.Option) (r *userdemo.InfoGetUserResponse, err error)
+	MGetUser(ctx context.Context, req *userdemo.MGetUserRequest, callOptions ...callopt.Option) (r *userdemo.MGetUserResponse, err error)
+	UpdateUser(ctx context.Context, req *userdemo.UpdateUserRequest, callOptions ...callopt.Option) (r *userdemo.UpdateUserResponse, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -52,4 +55,19 @@ func (p *kUserServiceClient) CreateUser(ctx context.Context, req *userdemo.Creat
 func (p *kUserServiceClient) CheckUser(ctx context.Context, req *userdemo.CheckUserRequest, callOptions ...callopt.Option) (r *userdemo.CheckUserResponse, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.CheckUser(ctx, req)
+}
+
+func (p *kUserServiceClient) InfoGetUser(ctx context.Context, req *userdemo.InfoGetUserRequest, callOptions ...callopt.Option) (r *userdemo.InfoGetUserResponse, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.InfoGetUser(ctx, req)
+}
+
+func (p *kUserServiceClient) MGetUser(ctx context.Context, req *userdemo.MGetUserRequest, callOptions ...callopt.Option) (r *userdemo.MGetUserResponse, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.MGetUser(ctx, req)
+}
+
+func (p *kUserServiceClient) UpdateUser(ctx context.Context, req *userdemo.UpdateUserRequest, callOptions ...callopt.Option) (r *userdemo.UpdateUserResponse, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.UpdateUser(ctx, req)
 }

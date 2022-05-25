@@ -33,7 +33,40 @@ struct CheckUserResponse {
     2:i64 user_id
 }
 
+struct InfoGetUserRequest {
+    1:i64 user_id
+    2:i64 to_user_id
+}
+
+struct InfoGetUserResponse {
+    1:BaseResp base_resp
+    2:User user
+}
+
+struct MGetUserRequest {
+    1:i64 user_id
+    2:i32 action_type
+}
+
+struct MGetUserResponse {
+    1:BaseResp base_resp
+    2:list<User> users
+}
+
+struct UpdateUserRequest {
+    1:i64 user_id
+    2:i64 to_user_id
+    3:i32 action_type
+}
+
+struct UpdateUserResponse {
+    1:BaseResp base_resp
+}
+
 service UserService {
     CreateUserResponse CreateUser(1:CreateUserRequest req)
     CheckUserResponse CheckUser(1:CheckUserRequest req)
+    InfoGetUserResponse InfoGetUser(1:InfoGetUserRequest req)
+    MGetUserResponse MGetUser(1:MGetUserRequest req)
+    UpdateUserResponse UpdateUser(1:UpdateUserRequest req)
 }

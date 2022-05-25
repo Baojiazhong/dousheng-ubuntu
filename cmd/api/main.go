@@ -20,17 +20,18 @@ func Init() {
 }
 
 var authMiddleware *jwt.GinJWTMiddleware
-var r *gin.Engine
 
 func main() {
 	Init()
-	r = gin.New()
+	r := gin.New()
 	authMiddleware, _ = jwt.New(&jwt.GinJWTMiddleware{
 		Key:        []byte(constants.SecretKey),
 		Timeout:    time.Hour,
 		MaxRefresh: time.Hour,
 		PayloadFunc: func(data interface{}) jwt.MapClaims {
+			// fmt.Printf("data: %v\n", data)
 			if v, ok := data.(int64); ok {
+				// fmt.Println("11111111111111111111111111111")
 				return jwt.MapClaims{
 					constants.IdentityKey: v,
 				}
@@ -58,7 +59,7 @@ func main() {
 			// 	"user_id":     user_id,
 			// 	"token":       token,
 			// })
-			handlers.SendLoginResponse(c, res, user_id, token)
+			handlers.SendLoginResponse(c, res, user_id, token, expire)
 		},
 		TokenLookup:   "header: Authorization, query: token, cookie: jwt",
 		TokenHeadName: "Bearer",
@@ -69,6 +70,15 @@ func main() {
 	user1 := v1.Group("/user")
 	user1.POST("/login/", authMiddleware.LoginHandler)
 	user1.POST("/register/", Register)
+	// ----------------------------------------------
+	user1.Use(authMiddleware.MiddlewareFunc())
+	user1.GET("/", handlers.GetUserInfo)
+
+	user2 := v1.Group("/relation")
+	user2.Use(authMiddleware.MiddlewareFunc())
+	user2.GET("/follow/list/", handlers.GetFollowList)
+	user2.GET("/follower/list/", handlers.GetFollowerList)
+	user2.POST("/action/", handlers.FollowAction)
 
 	if err := http.ListenAndServe(":8080", r); err != nil {
 		klog.Fatal(err)
