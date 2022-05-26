@@ -112,14 +112,14 @@ func UpdateUser(ctx context.Context, req *userdemo.UpdateUserRequest) error {
 			return err
 		}
 		user1.FollowCount += 1
-		if err = DB.WithContext(ctx).Model(&user1).Updates(user1).Error; err != nil {
+		if err = DB.WithContext(ctx).Model(&user1).Select("follow_count").Updates(user1).Error; err != nil {
 			return err
 		}
 		if err = DB.WithContext(ctx).Where("id = ?", req.ToUserId).First(&user2).Error; err != nil {
 			return err
 		}
 		user2.FollowerCount += 1
-		if err = DB.WithContext(ctx).Model(&user2).Updates(user2).Error; err != nil {
+		if err = DB.WithContext(ctx).Model(&user2).Select("follower_count").Updates(user2).Error; err != nil {
 			return err
 		}
 	} else if req.ActionType == constants.RelationDel {
@@ -127,16 +127,24 @@ func UpdateUser(ctx context.Context, req *userdemo.UpdateUserRequest) error {
 			return err
 		}
 		user1.FollowCount -= 1
-		if err = DB.WithContext(ctx).Model(&user1).Updates(user1).Error; err != nil {
+		if err = DB.WithContext(ctx).Model(&user1).Select("follow_count").Updates(user1).Error; err != nil {
 			return err
 		}
 		if err = DB.WithContext(ctx).Where("id = ?", req.ToUserId).First(&user2).Error; err != nil {
 			return err
 		}
 		user2.FollowerCount -= 1
-		if err = DB.WithContext(ctx).Model(&user2).Updates(user2).Error; err != nil {
+		if err = DB.WithContext(ctx).Model(&user2).Select("follower_count").Updates(user2).Error; err != nil {
 			return err
 		}
 	}
 	return nil
+}
+
+func QueryFollowRelation(ctx context.Context, users []*User, userId int64) ([]int64, error) {
+	isFollowList := make([]int64, len(users))
+	for i, user := range users {
+		DB.WithContext(ctx).Model(&Follower{}).Where("user_id = ? and follower_id = ?", user.ID, userId).Count(&isFollowList[i])
+	}
+	return isFollowList, nil
 }

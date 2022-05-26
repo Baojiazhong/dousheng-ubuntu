@@ -79,14 +79,14 @@ func SendUserInfoResponse(c *gin.Context, err error, userId int64, followCount i
 }
 
 // SendUserListResponse
-func SendUserListResponse(c *gin.Context, err error, userList []*userdemo.User) {
-	Err := errno.ConvertErr(err)
-	c.JSON(http.StatusOK, UserListResponse{
-		Code:     Err.ErrCode,
-		Message:  Err.ErrMsg,
-		UserList: userList,
-	})
-}
+// func SendUserListResponse(c *gin.Context, err error, userList []*userdemo.User) {
+// 	Err := errno.ConvertErr(err)
+// 	c.JSON(http.StatusOK, UserListResponse{
+// 		Code:     Err.ErrCode,
+// 		Message:  Err.ErrMsg,
+// 		UserList: userList,
+// 	})
+// }
 
 type UserParam struct {
 	UserName string `json:"username"`

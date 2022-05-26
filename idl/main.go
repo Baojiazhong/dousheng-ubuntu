@@ -1,8 +1,9 @@
 package main
 
 import (
-	userdemo "github.com/Baojiazhong/dousheng-ubuntu/idl/kitex_gen/userdemo/userservice"
 	"log"
+
+	userdemo "github.com/Baojiazhong/dousheng-ubuntu/kitex_gen/userdemo/userservice"
 )
 
 func main() {
@@ -13,4 +14,6 @@ func main() {
 	if err != nil {
 		log.Println(err.Error())
 	}
+	// TODO: Your code here...
+	// 中文注释
 }

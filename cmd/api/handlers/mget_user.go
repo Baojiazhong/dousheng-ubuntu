@@ -22,7 +22,7 @@ func GetFollowList(c *gin.Context) {
 		SendResponse(c, errno.ConvertErr(err), nil)
 		return
 	}
-	SendUserListResponse(c, nil, user)
+	SendResponse(c, errno.Success, map[string]interface{}{"user_list": user})
 }
 
 // get follower list
@@ -36,5 +36,5 @@ func GetFollowerList(c *gin.Context) {
 		SendResponse(c, errno.ConvertErr(err), nil)
 		return
 	}
-	SendUserListResponse(c, nil, user)
+	SendResponse(c, errno.Success, map[string]interface{}{"user_list": user})
 }
