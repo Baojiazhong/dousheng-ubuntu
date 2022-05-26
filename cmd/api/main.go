@@ -59,7 +59,7 @@ func main() {
 			// 	"user_id":     user_id,
 			// 	"token":       token,
 			// })
-			handlers.SendLoginResponse(c, res, user_id, token, expire)
+			handlers.SendLoginResponse(c, res, user_id, loginVar2.UserName, token, expire)
 		},
 		TokenLookup:   "header: Authorization, query: token, cookie: jwt",
 		TokenHeadName: "Bearer",

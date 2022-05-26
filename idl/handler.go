@@ -2,7 +2,8 @@ package main
 
 import (
 	"context"
-	"github.com/Baojiazhong/dousheng-ubuntu/idl/kitex_gen/userdemo"
+
+	"github.com/Baojiazhong/dousheng-ubuntu/kitex_gen/userdemo"
 )
 
 // UserServiceImpl implements the last service interface defined in the IDL.
