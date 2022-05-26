@@ -69,6 +69,8 @@ postman desktop
 
 基于jwt实现token分发;
 
+注意: app限制了密码不小于6个字符
+
 - 用户登录
 
 基于jwt实现token校验;
