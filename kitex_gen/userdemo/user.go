@@ -288,8 +288,8 @@ func (p *BaseResp) Field3DeepEqual(src int64) bool {
 }
 
 type User struct {
-	UserId        int64  `thrift:"user_id,1" json:"user_id"`
-	Username      string `thrift:"username,2" json:"username"`
+	UserId        int64  `thrift:"user_id,1" json:"id"`
+	Username      string `thrift:"username,2" json:"name"`
 	FollowCount   int64  `thrift:"follow_count,3" json:"follow_count"`
 	FollowerCount int64  `thrift:"follower_count,4" json:"follower_count"`
 	IsFollow      bool   `thrift:"is_follow,5" json:"is_follow"`

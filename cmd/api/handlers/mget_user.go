@@ -22,7 +22,23 @@ func GetFollowList(c *gin.Context) {
 		SendResponse(c, errno.ConvertErr(err), nil)
 		return
 	}
-	SendResponse(c, errno.Success, map[string]interface{}{"user_list": user})
+	// 这样的话返回的格式为:
+	// "data": {
+	//     "user_list": [
+	//         {
+	//             "note_id": 1,
+	//             "user_id": 1,
+	//             "user_name": "kinggo",
+	//             "user_avatar": "test",
+	//             "title": "test title",
+	//             "content": "test content",
+	//             "create_time": 1642525063
+	//         }
+	//     ],
+	//     "total": 1
+	// }
+	// SendResponse(c, errno.Success, map[string]interface{}{"user_list": user})
+	SendUserListResponse(c, errno.Success, user)
 }
 
 // get follower list
@@ -36,5 +52,5 @@ func GetFollowerList(c *gin.Context) {
 		SendResponse(c, errno.ConvertErr(err), nil)
 		return
 	}
-	SendResponse(c, errno.Success, map[string]interface{}{"user_list": user})
+	SendUserListResponse(c, errno.Success, user)
 }
